@@ -50,10 +50,12 @@ Download the files from omdb.org:
 
 Import into the omdb PostgreSQL database:
 ```
+docker exec -it pgist bash
+cd /mnt/omdb-postgresql
 ./import
 ```
 
 Create `omdb.dump` database export file:
 ```
-pg_dump -Fc -f omdb.dump omdb
+pg_dump -U postgres -Fc -f omdb.dump omdb
 ```

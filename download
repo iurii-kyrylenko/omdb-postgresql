@@ -9,6 +9,8 @@
 set -eu
 
 BASE="https://www.omdb.org/data/"
+TARGET_DIR="www.omdb.org/data/"
+EXT=".csv.bz2"
 
 FILES="
 all_movies
@@ -49,7 +51,9 @@ movie_content_updates
 "
 
 # omitted: all_characters (not used in schema)
+mkdir -p "$TARGET_DIR"
 
 for f in $FILES; do
-  wget --no-verbose --mirror "$BASE$f.csv.bz2"
+  curl -O "$BASE$f$EXT"
+  mv "$f$EXT" "$TARGET_DIR"
 done
